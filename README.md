@@ -6,13 +6,9 @@ analysis of 21cm and 21cm-galaxy cross correlation power spectra. It offers a wi
 described in the official documentation which can be found in the topk github repository in PDF form.
 
 > [!NOTE]
-> If you use topk, please cite the following papers:
-> 1. M. Berti, M. Spinelli, B.S. Haridasu, M. Viel, A. Silvestri, *Constraining beyond* $\Lambda$*CDM models with 21cm 
-> intensity mapping forecast observations combined with latest CMB data.* [arXiv:2109.03256](https://arxiv.org/abs/2109.03256)
-> 2. M. Berti, M. Spinelli, M. Viel, *Multipole expansion for 21cm Intensity Mapping power spectrum: forecasted
-> cosmological parameters estimation for the SKA Observatory.* [arXiv:2209.07595](https://arxiv.org/abs/2209.07595)
-> 3. M. Berti, M. Spinelli, M. Viel, *21 cm intensity mapping cross-correlation with galaxy surveys: Current and
-> forecasted cosmological parameters estimation for the SKAO.* [arXiv:2309.00710](https://arxiv.org/abs/2309.00710)
+> If you use topk, please cite:
+> - M. Berti, M. Spinelli, M. Viel, *Multipole expansion for 21cm Intensity Mapping power spectrum: forecasted
+> cosmological parameters estimation for the SKA Observatory,* Monthly Notices of the Royal Astronomical Society, [521 (2023) 3](https://academic.oup.com/mnras/article/521/3/3221/7070719), [arXiv:2209.07595](https://arxiv.org/abs/2209.07595)
 
 ## Prerequisites 
 Topk is written in python 3.9 and requires an installation of Cobaya. Further informations on prerequisites for Cobaya and more
