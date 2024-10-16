@@ -1,0 +1,164 @@
+### YAML file for the 21cm likelihood example
+# Firsly we specify the options for the theory code, in this case CAMB
+theory:
+  camb:
+    extra_args:
+      halofit_version: mead2020
+      bbn_predictor: PArthENoPE_880.2_standard.dat
+      lens_potential_accuracy: 1
+      num_massive_neutrinos: 1
+      nnu: 3.044
+      theta_H0_range:
+      - 20
+      - 100
+likelihood:
+  topk.topk:    # If cobaya doesn't find the likelihood, try to add the option "- python_path: /full/path/to/topk" as one of the likelihood options
+    zs_21: 
+    - 0.25
+    - 0.75
+    - 1.25
+    - 1.75
+    - 2.25
+    - 2.75
+    path: 'data_21cm'   # Insert full path to data folder which is provided together with the code in the github repo.
+    cross_0: False
+    cross_2: False
+    topk_0: True
+    topk_2: True
+    topk_4: False
+    FoG: False
+    shot_noise: False
+    nuisances_21: False
+    off_diag_cov: True
+    AP_effect: True
+    T_b_model: 'Battye_13'
+    b_HI_model: 'Navarro_18'
+    nonlinear_matter: False
+    H0_fid: 67.32
+    ombh2_fid: 0.022383
+    omch2_fid: 0.12011
+    tau_fid: 0.0543
+    mnu_fid: 0.06
+    # Other options that are not specified here will be initiated with the default setting
+params:   # The full list of parameters both varied in the MCMC and derived
+  logA:
+    prior:
+      min: 1.61
+      max: 3.91
+    ref:
+      dist: norm
+      loc: 3.05
+      scale: 0.001
+    proposal: 0.001
+    latex: \log(10^{10} A_\mathrm{s})
+    drop: true
+  As:
+    value: 'lambda logA: 1e-10*np.exp(logA)'
+    latex: A_\mathrm{s}
+  ns:
+    prior:
+      min: 0.8
+      max: 1.2
+    ref:
+      dist: norm
+      loc: 0.96
+      scale: 0.004
+    proposal: 0.002
+    latex: n_\mathrm{s}
+  theta_MC_100:
+    prior:
+      min: 0.5
+      max: 10
+    ref:
+      dist: norm
+      loc: 1.0411
+      scale: 0.0004
+    proposal: 0.0002
+    latex: 100\theta_\mathrm{MC}
+    drop: true
+    renames: theta
+  cosmomc_theta:
+    value: 'lambda theta_MC_100: 1.e-2*theta_MC_100'
+    derived: false
+  H0:
+    latex: H_0
+    min: 20
+    max: 100
+  ombh2:
+    prior:
+      min: 0.005
+      max: 0.1
+    ref:
+      dist: norm
+      loc: 0.0221
+      scale: 0.0001
+    proposal: 0.0001
+    latex: \Omega_\mathrm{b} h^2
+  omch2:
+    prior:
+      min: 0.001
+      max: 0.99
+    ref:
+      dist: norm
+      loc: 0.12
+      scale: 0.001
+    proposal: 0.0005
+    latex: \Omega_\mathrm{c} h^2
+  omegam:
+    latex: \Omega_\mathrm{m}
+  omegamh2:
+    derived: 'lambda omegam, H0: omegam*(H0/100)**2'
+    latex: \Omega_\mathrm{m} h^2
+  mnu: 0.06
+  omega_de:
+    latex: \Omega_\Lambda
+  YHe:
+    latex: Y_\mathrm{P}
+  Y_p:
+    latex: Y_P^\mathrm{BBN}
+  DHBBN:
+    derived: 'lambda DH: 10**5*DH'
+    latex: 10^5 \mathrm{D}/\mathrm{H}
+  tau:
+    prior:
+      min: 0.01
+      max: 0.8
+    ref:
+      dist: norm
+      loc: 0.06
+      scale: 0.006
+    proposal: 0.003
+    latex: \tau_\mathrm{reio}
+  zrei:
+    latex: z_\mathrm{re}
+  sigma8:
+    latex: \sigma_8
+  s8h5:
+    derived: 'lambda sigma8, H0: sigma8*(H0*1e-2)**(-0.5)'
+    latex: \sigma_8/h^{0.5}
+  s8omegamp5:
+    derived: 'lambda sigma8, omegam: sigma8*omegam**0.5'
+    latex: \sigma_8 \Omega_\mathrm{m}^{0.5}
+  s8omegamp25:
+    derived: 'lambda sigma8, omegam: sigma8*omegam**0.25'
+    latex: \sigma_8 \Omega_\mathrm{m}^{0.25}
+  A:
+    derived: 'lambda As: 1e9*As'
+    latex: 10^9 A_\mathrm{s}
+  clamp:
+    derived: 'lambda As, tau: 1e9*As*np.exp(-2*tau)'
+    latex: 10^9 A_\mathrm{s} e^{-2\tau}
+  age:
+    latex: '{\rm{Age}}/\mathrm{Gyr}'
+  rdrag:
+    latex: r_\mathrm{drag}
+sampler:
+  mcmc:
+    drag: true
+    oversample_power: 0.4
+    proposal_scale: 1.9
+    temperature: 1
+    covmat: # Add the path to the covmat file 
+    Rminus1_stop: 0.02
+    Rminus1_cl_stop: 0.1
+output: chains_21cm/chains_21_test  # Output folder for the chains
