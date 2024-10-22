@@ -1,5 +1,5 @@
 ### YAML file for the cross likelihood example
-# Firsly we specify the options for the theory code, in this case CAMB
+# First we specify the options for the theory code, in this case CAMB
 theory:
   camb:
     extra_args:
@@ -12,7 +12,8 @@ theory:
       - 20
       - 100
 likelihood:
-  topk.topk:    # If cobaya doesn't find the likelihood, try to add the option "- python_path: /full/path/to/topk" as one of the likelihood options
+  topk.topk:    
+    python_path: /full/path/to/topk.py # Not needed if in the same folder as yaml
     zs_cross: 
     - 0.75
     - 0.85
@@ -24,7 +25,7 @@ likelihood:
     - 1.45
     - 1.55
     - 1.65
-    path: 'data_cross'   # Insert full path to data folder which is provided together with the code in the github repo.
+    path: 'data_cross'   # Full path to data
     cross_0: True
     cross_2: False
     topk_0: False
@@ -44,7 +45,7 @@ likelihood:
     omch2_fid: 0.12011
     tau_fid: 0.0543
     mnu_fid: 0.06
-    # Other options that are not specified here will be initiated with the default setting
+    # See topk.py for a full list and description of available options
 params:   # The full list of parameters both varied in the MCMC and derived
   galaxy_bias_1:
     value: 1.048
