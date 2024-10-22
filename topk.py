@@ -1,16 +1,5 @@
-import os 
-import numpy as np  
-import camb as my_camb  
-from scipy.interpolate import interp1d 
-from scipy.integrate import quad  
-from scipy import integrate 
-from typing import Optional, Sequence, List  
-from cobaya.likelihood import Likelihood 
-from cobaya.log import LoggedError 
-from cobaya.conventions import Const, packages_path_input  
+#### TOPK code ####
 
-#### Trial for TOPK code ####
-### Loading data ###
 #################### IMPORTANT ######################
 ### This section outlines the expected naming conventions for input files.
 ### 1) 21 cm Multipoles: Files should be named in the format "Pl_z" where z is the redshift and l is the multipole.
@@ -22,6 +11,17 @@ from cobaya.conventions import Const, packages_path_input
 ### NOTE: l<k, so cov20_z.dat does not exist!!
 ### FOR CROSS: Same naming convention as for 21cm but P0_025.dat becomes --> PC0_025.dat, etc...
 ### FOR CROSS COVARIANCE: cov00_025.dat becomes --> covcross00_025.dat, etc...
+
+import os 
+import numpy as np  
+import camb as my_camb  
+from scipy.interpolate import interp1d 
+from scipy.integrate import quad  
+from scipy import integrate 
+from typing import Optional, Sequence, List  
+from cobaya.likelihood import Likelihood 
+from cobaya.log import LoggedError 
+from cobaya.conventions import Const, packages_path_input  
 
 class topk(Likelihood):  # Inheriting from the Cobaya Likelihood base class
     # Class attributes with default values
@@ -56,12 +56,12 @@ class topk(Likelihood):  # Inheriting from the Cobaya Likelihood base class
     ombh2_fid: float = 0.022383  # Fiducial value for baryon density (ombh2)
     omch2_fid: float = 0.12011  # Fiducial value for cold dark matter density (omch2)
     tau_fid: float = 0.0543  # Fiducial value for optical depth (tau)
-    mnu_fid: float = 0.06  # Fiducial value for neutrino mass
+    mnu_fid: float = 0.06  # Fiducial value for neutrino mass [eV]
 
     params = {}  # Dictionary to hold model parameters
 
     def initialize(self):
-        # Initialization checks for the various data and parameters
+        # Initialization checks
         if (self.topk_0 or self.topk_2 or self.topk_4) and self.zs_21 is None:
             raise LoggedError(self.log, "\nNeed to specify the redshift bins for the 21cm data")
         
@@ -74,7 +74,7 @@ class topk(Likelihood):  # Inheriting from the Cobaya Likelihood base class
         if self.nuisances_cross and not (self.cross_0 or self.cross_2):
             raise LoggedError(self.log, "\nNuisances for cross cannot be switched on if no cross observables are selected.")
         
-        # Setup parameters for nuisance factors related to 21cm data
+        # Setup for nuisance parameters
         if self.nuisances_21:
             if self.nuisances_fitted:
                 if self.nuis_quadratic_fit:
