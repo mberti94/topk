@@ -1,30 +1,17 @@
-# Topk documentation
+# \texttt{topk} - a likelihood code for the 21cm power spectrum
 
 ## Description
-Topk is a cosmological likelihood code designed to be interfaced with the framework Cobaya. It is created to perform MCMC 
-analysis of 21cm and 21cm-galaxy cross correlation power spectra. It offers a wide variety of options which thoroughly
-described in the official documentation which can be found in the topk github repository in PDF form.
+\texttt{topk} is a cosmology code designed to compute the theoretical predictions and the likelihood for several 21cm intensity mapping observables. It can work with multiple redshift-bin observations of the 21cm auto-power spectrum multipoles (monopole, quadrupole, and hexadecapole) and of cross-correlation power spectra with galaxy clustering. \texttt{topk} offers a wide variety of options, thoroughly described in the documentation that can be found in the repository.
 
 > [!NOTE]
-> If you use topk, please cite:
-> - M. Berti, M. Spinelli, M. Viel, *Multipole expansion for 21cm Intensity Mapping power spectrum: forecasted
-> cosmological parameters estimation for the SKA Observatory,* Monthly Notices of the Royal Astronomical Society, [521 (2023) 3](https://academic.oup.com/mnras/article/521/3/3221/7070719), [arXiv:2209.07595](https://arxiv.org/abs/2209.07595)
+> \texttt{topk} is based on the following publications: [arXiv:2109.03256](https://arxiv.org/abs/2109.03256), [arXiv:2209.07595](https://arxiv.org/abs/2209.07595), [arXiv:2309.00710](https://arxiv.org/abs/2309.00710).
+> 
+> If you use topk, please cite at least [arXiv:2209.07595](https://arxiv.org/abs/2209.07595).
 
-## Prerequisites 
-Topk is written in python 3.9 and requires an installation of Cobaya. Further informations on prerequisites for Cobaya and more
-info on Cobaya's installation can be found in [Cobaya's documentation](https://cobaya.readthedocs.io/en/latest/index.html). 
-The following python modules are required:
-* numpy
-* scipy
-* os
-
-## Installation
-To use topk, download the latest release, all necessary files are already in place and ready to be used. Topk files don't need to 
-be located inside Cobaya's folder.
+## Pre-requisites 
+\texttt{topk} is designed to be interfaced with the code [Cobaya](https://cobaya.readthedocs.io/en/latest/index.html). The only pre-requisites are Python (version ≥ 3.9) and basic Python packages (numpy, scipy, os).
 
 ## How to run 
-Topk is designed to be run with Cobaya. When running Cobaya, insert topk's full path in the likelihood block of the input .yaml file.
-Here, all the options can be specified.
+In general, to use \texttt{topk} with Cobaya only the `topk.py` module is needed. The full path to `topk.py` must be specified in the likelihood block of the input yaml file for a Cobaya run.
 
-## Examples
-Examples of MCMC runs using topk can be found in the example section of the documentation.
+In the folder `examples`, we provide mock data sets and yaml files to reproduce the results from the papers and examples discussed in the documentation.
