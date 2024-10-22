@@ -1,5 +1,5 @@
 # topk - a likelihood code for the 21cm power spectrum
-Authors: Gabriele Autieri and Maria Berti
+Authors: Gabriele Autieri, Maria Berti, Marta Spinelli, and Matteo Viel
 
 ## Description
 topk is a cosmology code designed to compute the theoretical predictions and the likelihood for several 21cm intensity mapping observables. It can work with multiple redshift-bin observations of the 21cm auto-power spectrum multipoles (monopole, quadrupole, and hexadecapole) and of cross-correlation power spectra with galaxy clustering. topk offers a wide variety of options, thoroughly described in the documentation that can be found in the repository.
